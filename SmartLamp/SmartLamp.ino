@@ -17,7 +17,7 @@ void loop()
   digitalWrite(relay, LOW); //set relay low(lampu mati)
   statuspir = digitalRead(pir); //membaca data pir
   statusldr = analogRead(ldr); //membaca data ldr
-  statusldr = map(statusldr, 1, 310, 1, 25000); //konversi pembacaan ldr ke lux
+  statusldr = map(statusldr, 1, 310, 3, 984); //konversi pembacaan ldr ke lux
   
   if(statuspir == HIGH && statusldr < 200){ //cek kondisi jika ada gerakan(statuspir == HIGH) dan cahaya kurang(statusldr < 200)
     Serial.println("Lampu Menyala"); //output "Lampu Menyala" pada serial
