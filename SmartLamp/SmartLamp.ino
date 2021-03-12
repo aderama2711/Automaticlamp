@@ -17,7 +17,10 @@ void loop()
   digitalWrite(relay, LOW); //set relay low(lampu mati)
   statuspir = digitalRead(pir); //membaca data pir
   statusldr = analogRead(ldr); //membaca data ldr
-  statusldr = map(statusldr, 1, 310, 3, 984); //konversi pembacaan ldr ke lux
+  //dibawah ini code untuk konversi data ldr ke lux
+  float Vout = statusldr * (3.3 / 675); //Vout = inputLDR * (Vin / ADC_maks)
+  float RLDR = (220 * (3.3 - Vout)) / Vout; //RLDR = (Resistor * (Vin - Vout)) / Vout
+  statusldr = 500 / (RLDR*0.001); //Lux = 500 / (RLDR * 0.001)
   
   if(statuspir == HIGH && statusldr < 200){ //cek kondisi jika ada gerakan(statuspir == HIGH) dan cahaya kurang(statusldr < 200)
     Serial.println("Lampu Menyala"); //output "Lampu Menyala" pada serial
