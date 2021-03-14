@@ -1,6 +1,6 @@
-int relay = 4; //inisialisasi relay sebagai 4(pin dari relay)
-int pir = 2; //inisialisasi pir sebagai 2(pin dari pir)
-int ldr = A0; //inisialisasi ldr sebagai A0(pin dari ldr)
+#define relay D4 //inisialisasi relay sebagai 4(pin dari relay)
+#define pir D2 //inisialisasi pir sebagai 2(pin dari pir)
+#define ldr A0 //inisialisasi ldr sebagai A0(pin dari ldr)
 int statuspir = 0; //inisialisasi variabel pembacaan pir
 int statusldr = 0; //inisialisasi variabel pembacaan ldr
 
@@ -9,7 +9,7 @@ void setup()
   pinMode(relay, OUTPUT); //relay(pin 4) sebagai output
   pinMode(pir, INPUT); //pir(pin 2) sebagai input
   pinMode(ldr, INPUT); //ldr(pin A0) sebagai input
-  Serial.begin(9600); //inisialisasi serial dengan 9600 baud
+  Serial.begin(115200); //inisialisasi serial dengan 115200 baud
 }
 
 void loop()
@@ -22,13 +22,13 @@ void loop()
   float RLDR = (220 * (3.3 - Vout)) / Vout; //RLDR = (Resistor * (Vin - Vout)) / Vout
   statusldr = 500 / (RLDR*0.001); //Lux = 500 / (RLDR * 0.001)
   
-  if(statuspir == HIGH && statusldr < 200){ //cek kondisi jika ada gerakan(statuspir == HIGH) dan cahaya kurang(statusldr < 200)
-    Serial.println("Lampu Menyala"); //output "Lampu Menyala" pada serial
+  if(statusldr < 200 && statuspir == HIGH){ //cek kondisi jika ada gerakan(statuspir == HIGH) dan cahaya kurang(statusldr < 200)
+    Serial.printf("Lampu Menyala\n"); //output "Lampu Menyala" pada serial
     digitalWrite(relay, HIGH); //set relay high(lampu menyala)
-    delay(300000); //delay 300 second/5 minute
+    delay(300000); //delay 300000 ms / 300 second / 5 minute
   }
   else{ //jika kondisi diatas tidak terpenuhi
-    Serial.println(statuspir); //output nilai pir pada serial
-    Serial.println(statusldr); //output nilai ldr pada serial
+    Serial.printf("%d\n",statuspir); //output nilai pir pada serial
+    Serial.printf("%d\n",statusldr); //output nilai ldr pada serial
   }
 }
