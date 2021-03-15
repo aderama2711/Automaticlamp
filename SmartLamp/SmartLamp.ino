@@ -14,7 +14,7 @@ void setup()
 
 void loop()
 {
-  digitalWrite(relay, LOW); //set relay low(lampu mati)
+  digitalWrite(relay, HIGH); //set relay high(lampu mati)
   statuspir = digitalRead(pir); //membaca data pir
   statusldr = analogRead(ldr); //membaca data ldr
   //dibawah ini code untuk konversi data ldr ke lux
@@ -24,7 +24,7 @@ void loop()
   
   if(statusldr < 200 && statuspir == HIGH){ //cek kondisi jika ada gerakan(statuspir == HIGH) dan cahaya kurang(statusldr < 200)
     Serial.printf("Lampu Menyala\n"); //output "Lampu Menyala" pada serial
-    digitalWrite(relay, HIGH); //set relay high(lampu menyala)
+    digitalWrite(relay, LOW); //set relay low(lampu menyala)
     delay(300000); //delay 300000 ms / 300 second / 5 minute
   }
   else{ //jika kondisi diatas tidak terpenuhi
