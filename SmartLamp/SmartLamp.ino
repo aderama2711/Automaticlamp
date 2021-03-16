@@ -1,5 +1,5 @@
-#define relay D4 //inisialisasi relay sebagai 4(pin dari relay)
-#define pir D2 //inisialisasi pir sebagai 2(pin dari pir)
+#define relay 4 //inisialisasi relay sebagai 4(pin relay di D2)
+#define pir 5 //inisialisasi pir sebagai 5(pin pir di D1)
 #define ldr A0 //inisialisasi ldr sebagai A0(pin dari ldr)
 int statusldr = 0; //inisialisasi variabel pembacaan ldr
 
