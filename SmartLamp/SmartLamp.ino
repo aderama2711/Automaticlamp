@@ -29,4 +29,6 @@ void loop()
     Serial.printf("Status PIR : %d\n",digitalRead(pir)); //output nilai pir pada serial
     Serial.printf("Status LDR : %d Lux\n",statusldr); //output nilai ldr pada serial
   }
+
+  delay(500);
 }
