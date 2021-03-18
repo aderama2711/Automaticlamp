@@ -30,5 +30,5 @@ void loop()
     Serial.printf("Status LDR : %d Lux\n",statusldr); //output nilai ldr pada serial
   }
 
-  delay(500); //memberi jeda antar pembacaan sensor
+  delay(1000); //memberi jeda antar pembacaan sensor
 }
