@@ -1,6 +1,6 @@
 #include <AntaresESP8266MQTT.h>
 
-#define ACCESSKEY "8b11e6c49182a9c1:5dac8e61774ef20c" //sesuai antares
+#define ACCESSKEY "your-access-key" //sesuai antares
 #define WIFISSID "your-wifi-ssid" //SSID WiFi
 #define PASSWORD "your-wifi-password" //Password WiFi 
 
@@ -36,6 +36,7 @@ void loop() {
   statusldr = 500 / (RLDR*0.001); //Lux = 500 / (RLDR * 0.001)
   antares.add("lux", statusldr);
   antares.add("pir", digitalRead(pir));
+  antares.publish(projectName, deviceName);
   
   if(digitalRead(pir) == HIGH && statusldr < 200){ //cek kondisi jika ada gerakan(statuspir == HIGH) dan cahaya kurang(statusldr < 200)
     Serial.printf("Lampu Menyala\n"); //output "Lampu Menyala" pada serial
@@ -46,8 +47,6 @@ void loop() {
     Serial.printf("Status PIR : %d\n",digitalRead(pir)); //output nilai pir pada serial
     Serial.printf("Status LDR : %d Lux\n",statusldr); //output nilai ldr pada serial
   }
-
-  antares.publish(projectName, deviceName);
 
   delay(1000); //memberi jeda antar pembacaan sensor
 }
