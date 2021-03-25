@@ -11,7 +11,8 @@
 #define pir 5 //inisialisasi pir sebagai 5(pin pir di D1)
 #define ldr A0 //inisialisasi ldr sebagai A0(pin dari ldr)
 int statusldr = 0; //inisialisasi variabel pembacaan ldr
-int statuspir = 0; //inisialisasi variabel pembacaan ldr
+int statuspir = 0; //inisialisasi variabel pembacaan pir
+int statusled = 0; //inisialisasi variabel pembacaan pir
 
 AntaresESP8266MQTT antares(ACCESSKEY);
 
@@ -27,7 +28,7 @@ void setup() {
 }
 
 void loop() {
-
+  antares.checkMqttConnection();
   digitalWrite(relay, HIGH); //set relay high(lampu mati)
   statusldr = analogRead(ldr); //membaca data ldr
   statuspir = digitalRead(pir); //membaca data pir
@@ -39,15 +40,19 @@ void loop() {
   if(statuspir == HIGH && statusldr < 200){ //cek kondisi jika ada gerakan(statuspir == HIGH) dan cahaya kurang(statusldr < 200)
     Serial.printf("Lampu Menyala\n"); //output "Lampu Menyala" pada serial
     digitalWrite(relay, LOW); //set relay low(lampu menyala)
+    statusled=1;
     delay(300000); //delay 300000 ms / 300 second / 5 minute
   }
   else{ //jika kondisi diatas tidak terpenuhi
+    statusled=0;
     Serial.printf("Status PIR : %d\n",statuspir); //output nilai pir pada serial
     Serial.printf("Status LDR : %d Lux\n",statusldr); //output nilai ldr pada serial
   }
 
-  antares.add("lux", statusldr);
+  antares.add("ldr", statusldr);
   antares.add("pir", statuspir);
+  if(statusled==1) antares.add("led", "Lampu Menyala!");
+  else antares.add("led", "Lampu Mati");
   antares.publish(projectName, deviceName);
   
   delay(1000); //memberi jeda antar pembacaan sensor
