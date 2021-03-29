@@ -42,14 +42,15 @@ void loop() {
     Serial.printf("Lampu Menyala\n"); //output "Lampu Menyala" pada serial
     digitalWrite(relay, LOW); //set relay low(lampu menyala)
     antares.add("led", "Lampu Menyala!");
+    antares.publish(projectName, deviceName);
     delay(300000); //delay 300000 ms / 300 second / 5 minute
   }
   else{ //jika kondisi diatas tidak terpenuhi
     Serial.printf("Status PIR : %d\n",statuspir); //output nilai pir pada serial
     Serial.printf("Status LDR : %d Lux\n",statusldr); //output nilai ldr pada serial
     antares.add("led", "Lampu Mati");
+    antares.publish(projectName, deviceName);
   }
-  antares.publish(projectName, deviceName);
   
   delay(1000); //memberi jeda antar pembacaan sensor
 }
