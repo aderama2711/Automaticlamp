@@ -45,7 +45,6 @@ void loop() {
     delay(300000); //delay 300000 ms / 300 second / 5 minute
   }
   else{ //jika kondisi diatas tidak terpenuhi
-    statusled=0;
     Serial.printf("Status PIR : %d\n",statuspir); //output nilai pir pada serial
     Serial.printf("Status LDR : %d Lux\n",statusldr); //output nilai ldr pada serial
   }
