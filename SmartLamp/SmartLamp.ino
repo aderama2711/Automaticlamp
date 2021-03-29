@@ -47,8 +47,8 @@ void loop() {
   else{ //jika kondisi diatas tidak terpenuhi
     Serial.printf("Status PIR : %d\n",statuspir); //output nilai pir pada serial
     Serial.printf("Status LDR : %d Lux\n",statusldr); //output nilai ldr pada serial
+    antares.add("led", "Lampu Mati");
   }
-  antares.add("led", "Lampu Mati");
   antares.publish(projectName, deviceName);
   
   delay(1000); //memberi jeda antar pembacaan sensor
