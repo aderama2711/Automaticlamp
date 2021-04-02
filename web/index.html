@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Automatic Lamp</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript">
+		$(document).ready(function(){
+			setInterval(function(){
+				$.ajax({
+					url: 'https://lychee-crumble-45794.herokuapp.com/https://platform.antares.id:8443/~/antares-cse/antares-id/AutomaticLamp/AutomaticLamp/la',
+					method: 'GET',
+					headers: {
+						'X-M2M-Origin':'7dc57000dea4a3d5:83e96f357b69d921',
+						'Content-Type':'application/json;ty=4',
+						'Accept':'application/json'
+					},
+					dataType: 'json',
+					success:function(response){
+						data = JSON.parse(response["m2m:cin"].con);
+						console.log(data);
+						$("#data-ldr").text(data.ldr); //sesuaikan variabel dengan antares
+						$("#data-pir").text(data.pir); //sesuaikan variabel dengan antares
+						$("#data-status").text(data.led); //sesuaikan variabel dengan antares
+						$("#status").text("Connected"); //sesuaikan variabel dengan antares
+					},
+					error:function(data){
+						$("#data-ldr").text("Loading..."); //sesuaikan variabel dengan antares
+						$("#data-pir").text("Loading..."); //sesuaikan variabel dengan antares
+						$("#data-status").text("Loading..."); //sesuaikan variabel dengan antares
+						$("#status").text("Not Connected"); //sesuaikan variabel dengan antares
+					}
+				});
+			},1000)
+		});
+  </script>
+</head>
+
+<body>
+	<p class=center style="height=screen.width/2"></p>
+	<div class="center">
+	<h1 class="center">LDR : <span id="data-ldr">Loading...</span>
+    PIR : <span id="data-pir">Loading...</span></h1>
+	<h1 class="center"></br>Status : <span id="data-status">Loading...</span></h1>
+	</div>
+	<span id="status" style="position:absolute;bottom:0;">Loading...</span>
+</body>
+
+</html>

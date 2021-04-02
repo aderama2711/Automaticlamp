@@ -1,0 +1,28 @@
+body {
+	background-color:#3498db;
+	font-family: 'Averia Serif Libre', cursive;
+}
+span {
+	background-color:#3498db;
+	color:white;
+	font-family: 'Averia Serif Libre', cursive;
+}
+h1{
+	color:white;
+	text-align:center;
+	font-family: 'Averia Serif Libre', cursive;
+}
+.center {
+	height: 200px;
+	position: relative;
+	font-family: 'Averia Serif Libre', cursive;
+}
+
+.center h1 {
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-family: 'Averia Serif Libre', cursive;
+}
